@@ -1,0 +1,35 @@
+@mixin flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.App {
+  position: fixed;
+  left: 0; top: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(17, 17, 17);
+}
+.grid {
+  margin: 5px;
+  padding: 1px;
+  border: 1px solid white;
+  width: 775px;
+  height: 775px;
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.grid-item {
+  outline: 1px solid rgb(48, 48, 48);
+  width: 25px;
+  height: 25px;
+}
+
+.is-food{background-color: rgb(145, 63, 63);}
+.is-head{background-color: rgb(63, 100, 145);}
