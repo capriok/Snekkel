@@ -3,7 +3,10 @@
   justify-content: center;
   align-items: center;
 }
-
+.nav{
+  top: 0;
+  box-sizing: border-box; position: fixed;
+}
 .App {
   position: fixed;
   left: 0; top: 0;
@@ -14,23 +17,105 @@
   justify-content: center;
   background-color: rgb(17, 17, 17);
 }
+
+.easy{      box-shadow: 0px 0px 20px 0px rgba(255, 255, 255, 0.2);}
+.hard{      box-shadow: 0px 0px 20px 0px rgba(0, 102, 255, 0.2);}
+.insane{    box-shadow: 0px 0px 20px 0px rgba(255, 0, 0, 0.2);}
+.easybtn{   box-shadow: 0px 0px 5px 0px rgba(255, 255, 255, 0.2);}
+.hardbtn{   box-shadow: 0px 0px 5px 0px rgba(0, 102, 255, 0.2);}
+.insanebtn{ box-shadow: 0px 0px 5px 0px rgba(255, 0, 0, 0.2);}
+// .easy{       border: 1px solid rgba(255, 255, 255, .3);}
+// .hard{       border: 1px solid rgba(0, 102, 255, 0.3);}
+// .insane{     border: 1px solid rgba(255, 0, 0, .3);}
+// .easybtn{       border: 1px solid rgba(255, 255, 255, .3);}
+// .hardbtn{       border: 1px solid rgba(0, 102, 255, .3);}
+// .insanebtn{     border: 1px solid rgba(255, 0, 0, .3);}
+
+.border{border: 1px solid white}
 .grid {
+  position: relative;
   margin: 5px;
   padding: 1px;
-  border: 1px solid white;
   width: 775px;
+  min-width: 775px;
   height: 775px;
+  min-height: 775px;
   margin: auto;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  .img{
+    position: absolute;
+    left: 0;top: 0;
+    width: 100%;
+    opacity: .3;
+  }
 }
+.border{border: 1px solid rgba(255, 255, 255, .8)}
 .grid-item {
   outline: 1px solid rgb(48, 48, 48);
   width: 25px;
   height: 25px;
+  z-index: 1000;
+  background-color: rgb(17, 17, 17);
+}
+.modal{
+  @include flex;
+  flex-direction: column;
+  margin: auto auto;
+  width: 50%;
+  padding: 20px;
+  border-radius: 3px;
+  border: 1px solid white;
+  user-select: none;
+  color: white;
+  background-color: rgb(20, 20, 20);
+  z-index: 1000;
+  position: relative;
+  h1{
+    width:100%;
+    padding-bottom: 20px;
+    text-align: center;
+  }
+  button{
+    margin: 0px 5px;
+    padding: 10px 30px;
+    border-radius: 3px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    outline: none;
+    cursor: pointer;
+    color:white;
+    background-color: transparent;
+    transition: all .2s;
+    &:hover{
+      transition: all .3s;
+      background-color: rgb(26, 26, 26);
+    }
+  }
+}
+$snake-main: rgb(45, 45, 45);
+$snake-head: rgb(0, 45, 84);
+$snake-tail: rgba(0, 27, 56, 0.8);
+.is-food{background-image: url('./gallery/food.png');background-size: cover;}
+.is-head{background-color: $snake-main; box-shadow: inset 0px 0px 20px 0px $snake-head;}
+.is-tail{background-color: $snake-main; box-shadow: inset 0px 0px 20px 0px $snake-tail;}
+
+.unavailable{
+  background-color: rgb(17, 17, 17);
+  position: absolute;
+  left: 0; top: 0;
+  width: 100vw;
+  height: 100vh;
+  @include flex;
+  flex-direction: column;
+  text-align: center;
+  p{color:white; width: 100%;}
 }
 
-.is-food{background-color: rgb(145, 63, 63);}
-.is-head{background-color: rgb(66, 111, 166);}
-.is-tail{background-color: rgb(36, 68, 106);}
+.help{
+  position: absolute;
+  text-align: center;
+  top: 70px;
+  margin: 0 auto;
+  color: white;
+}
