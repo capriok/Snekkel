@@ -65,11 +65,11 @@ function App() {
       !dead && setTick(ticker + tickTime)
       // if head collides with food then eat
       if (snake.head.row === food.row && snake.head.col === food.col) {
+        setFood(getRandomFoodPos)
         snake.tail.push({
           row: snake.head.row,
           col: snake.head.col
         })
-        setFood(getRandomFoodPos)
         // increase snake speed based on difficulty
         switch (difficulty) {
           case 'easy':
@@ -227,7 +227,7 @@ function App() {
           </Menu>
         </Navbar>
         {help && <div className="help">
-          <div>WASD or Arrows</div>
+          <div>WASD to move</div>
           <div>Only your tail kills you</div>
         </div>}
         {isMobile

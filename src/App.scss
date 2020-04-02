@@ -93,12 +93,12 @@
     }
   }
 }
-$snake-main: rgb(45, 45, 45);
-$snake-head: rgb(0, 45, 84);
-$snake-tail: rgba(0, 27, 56, 0.8);
-.is-food{background-image: url('./gallery/food.png');background-size: cover;}
-.is-head{background-color: $snake-main; box-shadow: inset 0px 0px 20px 0px $snake-head;}
-.is-tail{background-color: $snake-main; box-shadow: inset 0px 0px 20px 0px $snake-tail;}
+$snake-main: rgb(180, 180, 180);
+$snake-head: rgb(0, 79, 118);
+$snake-tail: rgb(0, 51, 80);
+.is-food{background-image: url('./gallery/food2.png');background-size: cover;}
+.is-head{background-color: $snake-main; box-shadow: inset 0px 0px 20px 7px $snake-head;}
+.is-tail{background-color: $snake-main; box-shadow: inset 0px 0px 20px 5px $snake-tail;}
 
 .unavailable{
   background-color: rgb(17, 17, 17);
