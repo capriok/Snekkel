@@ -3,14 +3,14 @@ import './App.scss';
 import './Index.scss';
 import snakeBg from './gallery/snake-bg.jpg'
 import Navbar from 'godspeed/build/Navbar'
-import Menu from 'godspeed/build/Menu'
-import MenuItem from 'godspeed/build/MenuItem'
+import NavLink from 'godspeed/build/NavLink'
+import Drawer from 'godspeed/build/Drawer'
 import { Tooltip } from 'react-tippy';
 import 'react-tippy/dist/tippy.css'
 
 function App() {
   const isMobile = window.innerWidth < 500
-  const [navMenu, setNavMenu] = useState(false)
+  const [drawer, openDrawer] = useState(false)
 
   let rows = 31
   let cols = 31
@@ -33,6 +33,22 @@ function App() {
   const [food, setFood] = useState(getRandomFoodPos)
   const [currentDirection, setDirection] = useState('up')
 
+
+  const getDirection = (curr, prev, next) => {
+    if (prev) {
+      if (curr.col === prev.col && curr.row - 1 === prev.row) {
+        return "up";
+      } else if (curr.col === prev.col && curr.row + 1 === prev.row) {
+        return "down";
+      } else if (curr.col + 1 === prev.col && curr.row === prev.row) {
+        return "right";
+      } else if (curr.col - 1 === prev.col && curr.row === prev.row) {
+        return "left";
+      }
+    }
+    return currentDirection
+  }
+
   // draw grid and place food, head, and tail
   useEffect(() => {
     // populate grid
@@ -43,15 +59,21 @@ function App() {
           const isFood = (food.row === row && food.col === col)
           const isHead = (snake.head.row === row && snake.head.col === col)
           let isTail = false;
-          snake.tail.forEach(t => {
+          let isLastTail = false;
+          let direction = "";
+          snake.tail.forEach((t, index) => {
             if (t.row === row && t.col === col) {
               isTail = true;
+              direction = getDirection(t, snake.tail[index - 1], snake.tail[index + 1]);
+              isLastTail = snake.tail.length - 1 === index;
             }
           })
-          population.push({ row, col, isFood, isHead, isTail })
+
+          population.push({ row, col, isFood, isHead, isTail, isLastTail, direction })
         }
       }
       setGrid(population)
+
     }
   }, [ticker])
 
@@ -64,12 +86,15 @@ function App() {
     const gameTick = setTimeout(() => {
       !dead && setTick(ticker + tickTime)
       // if head collides with food then eat
+
       if (snake.head.row === food.row && snake.head.col === food.col) {
         setFood(getRandomFoodPos)
         snake.tail.push({
           row: snake.head.row,
-          col: snake.head.col
+          col: snake.head.col,
+          isBody: true
         })
+
         // increase snake speed based on difficulty
         switch (difficulty) {
           case 'easy':
@@ -217,14 +242,37 @@ function App() {
     isDead(false)
   }
 
+  const paintGrid = (isFood, isHead, isTail, isLastTail, direction) => {
+
+    let baseGridItem = "grid-item";
+
+    if (isHead) { return baseGridItem + " is-head " + currentDirection; }
+    if (isLastTail) { return baseGridItem + " is-last-tail " + direction; }
+    if (isTail) { return baseGridItem + " snake-body " + direction; }
+    if (isFood) { return baseGridItem + " is-food "; }
+    return baseGridItem;
+
+  }
+
+
+  // isHead
+  // ? "grid-item is-head " + currentDirection : isFood
+  //   ? "grid-item is-food" : isTail
+  //     ? "grid-item snake-body" : isLastTail
+  //       ? "grid-item isLastTail" : "grid-item"
+
+
   return (
     <>
+      {drawer &&
+        <Drawer onClick={() => openDrawer(false)} open={drawer} bg="rgb(17, 17, 17)" color="white" >
+          <h1>Title</h1>
+          <p>This is some placeholder content</p>
+        </Drawer>
+      }
       <div className="App">
         <Navbar className="nav" title="Kyle Caprio" shadow>
-          <Menu onClick={() => setNavMenu(!navMenu)} open={navMenu} text="≡">
-            <MenuItem><a href="https://kylecaprio.dev">Portfolio</a></MenuItem>
-            <MenuItem><a href="https://disarray.kylecaprio.dev">Disarray</a></MenuItem>
-          </Menu>
+          <NavLink onClick={() => openDrawer(!drawer)}><h1>≡</h1></NavLink>
         </Navbar>
         {help && <div className="help">
           <div>WASD to move</div>
@@ -244,13 +292,8 @@ function App() {
                   <button onClick={resetGame}>Start Game</button>
                 </div>
               </div>
-              : !dead && grid.map(({ row, col, isFood, isHead, isTail }) => (
-                <div key={`${row}-${col}`} className={
-                  isHead
-                    ? "grid-item is-head" : isFood
-                      ? "grid-item is-food" : isTail
-                        ? "grid-item is-tail" : "grid-item"
-                }></div>
+              : !dead && grid.map(({ row, col, isFood, isHead, isTail, isLastTail, direction }) => (
+                <div key={`${row}-${col}`} className={paintGrid(isFood, isHead, isTail, isLastTail, direction)}></div>
               ))}
             {(dead && !init) &&
               <div className="modal">
