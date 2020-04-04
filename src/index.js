@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import './App.scss';
-import './Index.scss';
+import './index.scss';
 
 export default function Index() {
   return (
