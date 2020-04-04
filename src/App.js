@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import './App.scss';
-import './Index.scss';
 import snakeBg from './gallery/snake-bg.jpg'
 import Navbar from 'godspeed/build/Navbar'
 import NavLink from 'godspeed/build/NavLink'
