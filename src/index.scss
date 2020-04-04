@@ -22,4 +22,9 @@ h1 {
   letter-spacing: 1px;
 }
 li{list-style: none;}
-a {text-decoration: none;}
+a{
+  text-decoration: none;
+  color: inherit;
+  font-size: 1.2rem; 
+  font-weight: 300;
+}

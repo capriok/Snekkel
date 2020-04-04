@@ -3,10 +3,6 @@
   justify-content: center;
   align-items: center;
 }
-.nav{
-  top: 0;
-  box-sizing: border-box; position: fixed;
-}
 .App {
   position: fixed;
   left: 0; top: 0;
@@ -18,12 +14,36 @@
   background-color: rgb(17, 17, 17);
 }
 
+.drawer{
+  *{padding: 10px 0px;text-decoration: none; color: inherit}
+  text-align: center;
+  h1:not(:first-child){border-top: 1px solid white;}
+  h1{
+    border-bottom: 1px solid white;
+    padding: 5vh;
+    font-size: 1.8rem;
+    font-weight: 300;
+    letter-spacing: 1px;
+  }
+  p{
+    cursor: pointer;
+    margin: 1px 0;
+    padding: 15px 0;
+    width: 100%;
+    transition: all .3s;
+    &:hover{
+      background-color: rgb(31, 31, 31);
+      transition: all .3s;
+    }
+  }
+}
+
 .easy{      box-shadow: 0px 0px 20px 0px rgba(255, 255, 255, 0.2);}
 .hard{      box-shadow: 0px 0px 20px 0px rgba(0, 102, 255, 0.2);}
 .insane{    box-shadow: 0px 0px 20px 0px rgba(255, 0, 0, 0.2);}
-.easybtn{   box-shadow: 0px 0px 5px 0px rgba(255, 255, 255, 0.2);}
-.hardbtn{   box-shadow: 0px 0px 5px 0px rgba(0, 102, 255, 0.2);}
-.insanebtn{ box-shadow: 0px 0px 5px 0px rgba(255, 0, 0, 0.2);}
+.easybtn{   box-shadow: 0px 0px 5px 0px rgba(255, 255, 255, 0.4);}
+.hardbtn{   box-shadow: 0px 0px 5px 0px rgba(0, 102, 255, 0.4);}
+.insanebtn{ box-shadow: 0px 0px 5px 0px rgba(255, 0, 0, 0.4);}
 
 .border{border: 1px solid white}
 .grid {
@@ -109,23 +129,12 @@
   color: white;
 }
 
-.is-food{
-  background-image: url('./gallery/anim6.png');
-  background-size: cover;
-}
-.is-head{
-  background-image: url('./gallery/snake-head.png');
-  background-size: cover;
-}
+.is-food, .is-head, .is-body, .is-tail{background-size: cover;}
 
-.snake-body{
-  background-image: url('./gallery/snake-body.png');
-  background-size: cover;
-}
-.is-last-tail{
-  background-image: url('./gallery/snake-tail.png');
-  background-size: cover;
-}
+.is-food{background-image: url('./gallery/apple.png')}
+.is-head{background-image: url('./gallery/snake-head.png');}
+.is-body{background-image: url('./gallery/snake-body.png');}
+.is-tail{background-image: url('./gallery/snake-tail.png');}
 .up {transform: rotate(0deg);}
 .down {transform: rotate(180deg);}
 .right {transform: rotate(90deg);}
