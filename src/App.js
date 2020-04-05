@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import snakeBg from './gallery/snake-bg.jpg'
-import Navbar from 'godspeed/build/Navbar'
-import NavLink from 'godspeed/build/NavLink'
-import Drawer from 'godspeed/build/Drawer'
+import Navbar from './components/navbar'
 import { Tooltip } from 'react-tippy';
 import 'react-tippy/dist/tippy.css'
 
@@ -239,15 +237,12 @@ function App() {
   }
 
   const paintGrid = (isFood, isHead, isBody, isTail, direction) => {
-
     let baseGridItem = "grid-item";
-
     if (isHead) { return baseGridItem + " is-head " + currentDirection; }
     if (isTail) { return baseGridItem + " is-tail " + direction; }
     if (isBody) { return baseGridItem + " is-body " + direction; }
     if (isFood) { return baseGridItem + ` is-food ${Math.floor(Math.random(1 * 6))}`; }
     return baseGridItem;
-
   }
 
   const toggleHelp = () => {
@@ -258,25 +253,14 @@ function App() {
     }, 5000)
   }
 
+  const toggleDifficulty = () => {
+    difficulty === 'easy' ? setDifficulty('hard') : difficulty === 'hard' ? setDifficulty('insane') : setDifficulty('easy')
+  }
+
   return (
     <>
-      {drawer &&
-        <Drawer onClick={() => setDrawer(false)} open={drawer} bg="rgb(17, 17, 17)" color="white" padding="0px" >
-          <div className="drawer">
-            <h1>Game</h1>
-            <p onClick={() => {
-              toggleHelp()
-            }}>Objective</p>
-            <h1>Navigation</h1>
-            <p><a href="https://www.kylecaprio.dev">Portfolio</a></p>
-            <p><a href="https://disarray.kylecaprio.dev">Disarray</a></p>
-          </div>
-        </Drawer>
-      }
       <div className="App">
-        <Navbar className="nav" title="Kyle Caprio" shadow>
-          <NavLink onClick={() => setDrawer(!drawer)}><h1>≡</h1></NavLink>
-        </Navbar>
+        <Navbar className="nav" title="Kyle Caprio" to="/" shadow drawer={drawer} setDrawer={setDrawer} toggleHelp={toggleHelp} toggleDifficulty={toggleDifficulty} difficulty={difficulty} />
         {help && <div className="help">
           <div>WASD or Arrows to move</div>
           <div>Only your body kills you</div>
