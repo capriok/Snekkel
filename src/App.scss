@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300,400&display=swap');
 @mixin flex {
   display: flex;
   justify-content: center;
@@ -15,7 +16,7 @@
 }
 
 .drawer{
-  *{padding: 10px 0px;text-decoration: none; color: inherit}
+  *{padding: 10px 0px; text-decoration: none; color: inherit; font-family: Montserrat;}
   text-align: center;
   h1:not(:first-child){border-top: 1px solid white;}
   h1{

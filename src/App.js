@@ -64,7 +64,6 @@ function App() {
               isTail = snake.body.length - 1 === index;
             }
           })
-
           population.push({ row, col, isFood, isHead, isBody, isTail, direction })
         }
       }
