@@ -259,15 +259,18 @@ function App() {
   return (
     <>
       <div className="App">
-        <Navbar className="nav" title="Kyle Caprio" to="/" shadow drawer={drawer} setDrawer={setDrawer} toggleHelp={toggleHelp} toggleDifficulty={toggleDifficulty} difficulty={difficulty} />
+        <Navbar className="nav" title="Kyle Caprio" to="/" shadow
+          drawer={drawer} setDrawer={setDrawer} toggleHelp={toggleHelp}
+          toggleDifficulty={toggleDifficulty} difficulty={difficulty}
+          isMobile={isMobile} />
         {help && <div className="help">
           <div>WASD or Arrows to move</div>
           <div>Only your body kills you</div>
         </div>}
         {isMobile
           ? <div className="unavailable">
-            <p>Mobile version not avaibale</p>
-            <p>Try again later</p>
+            <p>Mobile version not available</p>
+            <p>Try again at a later date</p>
           </div>
           :
           <div className={`grid border ${difficulty}`}>
