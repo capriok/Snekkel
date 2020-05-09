@@ -29,7 +29,6 @@ function App() {
   const [food, setFood] = useState(getRandomFoodPos)
   const [currentDirection, setDirection] = useState('up')
 
-
   const getDirection = (curr, prev) => {
     if (prev) {
       if (curr.col === prev.col && curr.row - 1 === prev.row) {
@@ -68,7 +67,6 @@ function App() {
         }
       }
       setGrid(population)
-
     }
   }, [ticker])
 
@@ -80,14 +78,12 @@ function App() {
     const gameTick = setTimeout(() => {
       !dead && setTick(ticker + tickTime)
       // if head collides with food then eat
-
       if (snake.head.row === food.row && snake.head.col === food.col) {
         setFood(getRandomFoodPos)
         snake.body.push({
           row: snake.head.row,
           col: snake.head.col
         })
-
         // increase snake speed based on difficulty
         switch (difficulty) {
           case 'easy':
@@ -103,7 +99,6 @@ function App() {
         }
       }
     }, tickTime)
-
     // head collides with tail then reset game
     snake.body.forEach((piece) => {
       if (piece.row === snake.head.row && piece.col === snake.head.col) {
@@ -111,7 +106,6 @@ function App() {
         clearTimeout(gameTick)
       }
     })
-
     // move tail
     snake.body.unshift({ row: row, col: col, })
     snake.body.pop()
@@ -182,7 +176,6 @@ function App() {
           break;
       }
     }
-
   }, [ticker, dead])
 
   // keyboard controls
